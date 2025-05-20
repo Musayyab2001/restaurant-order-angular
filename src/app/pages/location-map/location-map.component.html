@@ -1,0 +1,31 @@
+<app-header></app-header>
+
+<div class="main">
+  <!-- Map Left Side -->
+  <div class="map-section">
+    <input
+      type="text"
+      placeholder="Nach Ort oder Restaurant suchen..."
+      [(ngModel)]="searchTerm"
+      class="search-input"
+    />
+
+    <div class="map-placeholder">
+      Kartenbereich (Map folgt später)
+    </div>
+  </div>
+
+  <!-- Restaurant List Right Side -->
+  <div class="list-section">
+    <h2>Restaurants in deiner Nähe</h2>
+
+    <div
+      *ngFor="let restaurant of filteredRestaurants()"
+      class="restaurant-card"
+      (click)="selectRestaurant(restaurant)"
+    >
+      <h3>{{ restaurant.name }}</h3>
+      <p>{{ restaurant.address }}</p>
+    </div>
+  </div>
+</div>

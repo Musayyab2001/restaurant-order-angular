@@ -1,0 +1,30 @@
+<h3>🛒 Warenkorb</h3>
+
+<ng-container *ngIf="cart$ | async as items">
+  <div *ngIf="items.length === 0" class="empty">Noch keine Artikel.</div>
+
+  <div *ngFor="let item of items" class="cart-item">
+    <img [src]="item.imageUrl" alt="{{ item.title }}" />
+    <div class="info">
+      <h4>{{ item.title }}</h4>
+      <p>{{ item.price | currency:'EUR' }}</p>
+
+      <div class="quantity-controls">
+        <button (click)="decrease(item.id)">−</button>
+        <span>{{ item.quantity }}</span>
+        <button (click)="increase(item.id)">+</button>
+      </div>
+
+      <p class="subtotal">
+        Zwischensumme: {{ item.price * item.quantity | currency:'EUR' }}
+      </p>
+      <button class="remove-btn" (click)="remove(item.id)">Entfernen</button>
+    </div>
+  </div>
+
+  <div *ngIf="items.length" class="total-section">
+    <hr />
+    <p><strong>Gesamt: {{ getTotal(items) | currency:'EUR' }}</strong></p>
+    <button (click)="clearCart()">Warenkorb leeren</button>
+  </div>
+</ng-container>
